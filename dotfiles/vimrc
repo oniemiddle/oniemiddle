@@ -1,0 +1,105 @@
+" Basic Settings
+set nocompatible              " Use Vim settings, rather than Vi
+filetype plugin indent on     " Enable file type detection
+syntax enable                 " Enable syntax highlighting
+
+" Display Settings
+set number                    " Show line numbers
+set relativenumber            " Show relative line numbers
+set ruler                     " Show cursor position
+set showcmd                   " Show command in bottom bar
+set cursorline                " Highlight current line
+set wildmenu                  " Visual autocomplete for command menu
+set showmatch                 " Highlight matching brackets
+set laststatus=2              " Always show status line
+set colorcolumn=80,120        " Show column markers
+
+" Search Settings
+set incsearch                 " Search as characters are entered
+set hlsearch                  " Highlight search matches
+set ignorecase                " Ignore case in search
+set smartcase                 " Override ignorecase if search contains uppercase
+
+" Indentation Settings
+set tabstop=4                 " Number of spaces per tab
+set softtabstop=4             " Number of spaces in tab when editing
+set shiftwidth=4              " Number of spaces to use for auto indent
+set expandtab                 " Convert tabs to spaces
+set autoindent                " Auto indent new lines
+set smartindent               " Smart indent
+
+" Performance Settings
+set lazyredraw                " Redraw only when needed
+set ttyfast                   " Faster redrawing
+
+" Backup and Undo Settings
+set nobackup                  " Don't create backup files
+set noswapfile                " Don't create swap files
+set undofile                  " Enable persistent undo
+set undodir=~/.vim/undodir    " Set undo directory
+
+" Split Settings
+set splitbelow                " Open new splits below
+set splitright                " Open new splits to the right
+
+" Encoding
+set encoding=utf-8            " Set encoding to UTF-8
+set fileencoding=utf-8        " Set file encoding
+
+" Mouse Support
+set mouse=a                   " Enable mouse support
+
+" Clipboard
+set clipboard=unnamedplus     " Use system clipboard
+
+" Folding
+set foldenable                " Enable folding
+set foldlevelstart=10         " Open most folds by default
+set foldmethod=indent         " Fold based on indent level
+
+" Key Mappings
+let mapleader = ","           " Set leader key to comma
+
+" Quick save
+nnoremap <leader>w :w<CR>
+
+" Quick quit
+nnoremap <leader>q :q<CR>
+
+" Turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
+
+" Move between splits
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Move lines up/down
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" Better indenting in visual mode
+vnoremap < <gv
+vnoremap > >gv
+
+" Autocommands
+if has("autocmd")
+    " Remove trailing whitespace on save
+    autocmd BufWritePre * :%s/\s\+$//e
+
+    " Remember cursor position
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+" Color scheme
+try
+    colorscheme desert
+catch
+    colorscheme default
+endtry
+
+" Status line
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ [LEN=%L]
