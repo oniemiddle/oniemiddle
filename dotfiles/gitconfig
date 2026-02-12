@@ -48,9 +48,6 @@
 	# Show a diff of last commit
 	dlc = diff --cached HEAD^
 	
-	# Show content of a file from a specific commit
-	f = "!git ls-files | grep -i"
-	
 	# Find a file path in codebase
 	find = "!git ls-files | grep -i"
 	
